@@ -666,15 +666,36 @@
         <meta name="msapplication-TileImage" content="https://seer365.com/wp-content/uploads/2022/10/cropped-Seer-S-Profile-Logo-270x270.jpg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G6Y8ZNHX00"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6Y8ZNHX00"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      // function gtag(){dataLayer.push(arguments);}
+      window.gtag = function() {
+    dataLayer.push(arguments);
+};
+    
+      gtag('js', new Date());
+    
+      gtag('config', 'G-G6Y8ZNHX00');
 
-  gtag('config', 'G-G6Y8ZNHX00');
+	    // Listen for messages from the iframe
+window.addEventListener("message", function(event) {
+    // Optional: Add security check for event.origin
+    if (event.data && event.data.type === 'gtag') {
+        // Call gtag with the arguments from the iframe message
+        gtag('event', event.data.event, {
+            'event_category': event.data.category,
+            'event_label': event.data.label,
+	    'event_sessioniddata': event.data.sessionId,
+	    'event_surveyurl': event.data.surveyUrl,
+	    'event_timedate': event.data.timedata,
+            'value': event.data.value
+        });
+    }
+});
 </script>
+
 	    
     </head>
     <body class="wp-singular page-template page-template-elementor_canvas page page-id-13277 wp-custom-logo wp-embed-responsive wp-theme-hello-elementor wp-child-theme-seer365 hello-elementor-default elementor-default elementor-template-canvas elementor-kit-5 elementor-page elementor-page-13277">
